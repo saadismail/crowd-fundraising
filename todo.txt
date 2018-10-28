@@ -1,0 +1,32 @@
+- Home
+    - General template showing who/what we are
+- Register
+    - Email Verification
+    - Captcha
+- Login
+    - Captcha
+- Forget Password
+    - Email verification
+    - Captcha
+- My Profile
+    - Past project/funds sent
+    - Past project/funds recieved
+- My Target
+    - Present projects status (funds collected)
+    - Link to past projects
+- Create project
+    - Specify category/tags**
+    - Specify description
+    - Specify title
+    - Specify status
+    - Specify how much funds to be collected/milestones (at what milestone/funds collected project will go in production)
+    - Add pictures/videos
+    - Send confirmation email
+- List projects
+    - Multiple projects displayed (sorted acc. to upvote)
+    - Can upvote/downvote project from there
+- Individual Project Page
+    - Description, Title, Media, Status, Votes, Funds recieved, Goal
+    - Help monitarily/non-monitarily
+        - Monitarily: Mocked Payment provider
+        - Non-monitarily: Volunteer or give some stuff

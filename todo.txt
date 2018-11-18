@@ -30,3 +30,7 @@
     - Help monitarily/non-monitarily
         - Monitarily: Mocked Payment provider
         - Non-monitarily: Volunteer or give some stuff
+- List Categories
+    - Title, Description, No. of related projects
+- About Us
+    - Show case team photos with github and social links

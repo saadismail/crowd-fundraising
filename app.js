@@ -6,7 +6,7 @@ const passport=require("passport");
 const mysql=require("mysql");
 const port=8081;
 const pool=require("./config/db");
-const userdb=require("./models/userdb");
+const userdb=require("./controller/userdb");
 
 pool.query('Select * from regUser;',(err,result,fields)=>{
   if(err) throw err;

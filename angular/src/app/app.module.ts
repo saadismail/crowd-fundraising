@@ -22,7 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
 
 import { AuthService } from './services/auth.service';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },

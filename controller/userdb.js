@@ -1,37 +1,25 @@
 const bcrypt=require("bcryptjs");
 const pool=require('../config/db');
+const convfunc=require('../controller/conversion');
 
-
-function convertTostring(temp){
-  return temp.toString();
-}
-function convertToInt(temp){
-  return parseInt(temp);
-}
-function convertToNum(temp){
-  
-  return Number(temp);
-}
 function hashPassword(password){
   var pass;
-  bcrypt.genSalt(10,(err,salt)=>{
-    bcrypt.hash(password,salt,(err,hash)=>{
-      if(err) throw err;
-      pass=hash;
-    });
-  });
-  return pass;
+  var salt=bcrypt.genSaltSync(10);
+  var hash=bcrypt.hashSync(password,salt);
+  console.log(hash);
+  return hash;
 }
+  
 
 module.exports.registerUser=function(req,res,next){
-  var name=convertTostring(req.body.name);
-  var email=convertTostring(req.body.email);
-  var password=convertTostring(req.body.password);
+  var name=convfunc.strconv(req.body.username);
+  var email=convfunc.strconv(req.body.email);
+  var password=convfunc.strconv(req.body.password);
   password=hashPassword(password);
-  var tfundsSent=convertToNum(req.body.fundsSent);
-  var cnic=convertToInt(req.body.cnic);
-  var ccNum=convertToInt(req.body.ccNum);
-  var userAddress=convertTostring(req.body.userAddress);
+  var tfundsSent=convfunc.numconv(req.body.fundsSent);
+  var cnic=convfunc.intconv(req.body.cnic);
+  var ccNum=convfunc.intconv(req.body.ccNum);
+  var userAddress=convfunc.strconv(req.body.userAddress);
  // console.log(name+" "+email+" "+ password+" "+tfundsSent+" "+date+" "+cnic+" "+ccNum+" "+userAddress);
   var query=`insert into DbProj.regUser(userName,
     userEmail,userPassword,dateOfReg,cnic,creditCardNo,userAddress)
@@ -43,11 +31,14 @@ module.exports.registerUser=function(req,res,next){
     });
 
 };
-module.exports.getUser=function(req,res,next){
-var username=req.body.username;
-  var query=`Select * from regUser where(userName='${username.toString()}')`
-  pool.query(query,(err,result,field)=>{
-    if(err) throw err;
-    res.send(result);
-  })
+module.exports.getUser=function(username,callback){
+  var query=`Select * from regUser where(userName='${username}')`
+  pool.query(query,callback);
 };
+
+module.exports.comparePassword=function(userPassword,hash,callback){
+  bcrypt.compare(userPassword,hash,(err,isMatch)=>{
+    if(err) throw err;
+    callback(null,isMatch);
+  })
+}

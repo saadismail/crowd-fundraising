@@ -1,0 +1,38 @@
+.container{
+  padding: 25px 50px 75px 100px;
+  align-items: center;
+  align-self: center;
+  background-color:whitesmoke;
+}
+.card-header{
+  padding: 25px 25px 15px 15px;
+  background-color: whitesmoke;
+  align-self: flex-start;
+  align-items:center;
+  align-content: center;
+  text-align: center;
+}
+.padd{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.list-style{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.card-body{
+  padding: 15px 15px 15px 15px;
+}
+.card {
+  border-radius: 25px;
+  
+  height: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+
+background-color:white;
+color:black;
+
+}

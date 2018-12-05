@@ -17,12 +17,11 @@ userRouter.post('/getUsers',(req,res,next)=>{
 });
 
 userRouter.post('/authenticate',(req,res,next)=>{
-  userdb.getUser(conv.strconv(req.body.username),(err,user)=>{
+  userdb.getUserByEmail(conv.strconv(req.body.email),(err,user)=>{
     if(err) throw err;
     if(!user){
       return res.json({success:false,msg:"User not found"});
     }
-    user=JSON.parse(JSON.stringify(user[0]));
     userdb.comparePassword(conv.strconv(req.body.password),user.userPassword,(err,isMatch)=>{
       if(err) throw err;
       if(isMatch){
@@ -48,5 +47,34 @@ userRouter.post('/authenticate',(req,res,next)=>{
 });
 userRouter.get("/profile",passport.authenticate("jwt",{session:false}),(req,res,next)=>{
   res.json({user:req.user});
+});
+userRouter.post('/like',(req,res,next)=>{
+  var uid=conv.intconv(req.body.userId);
+  var pid=conv.intconv(req.body.projectId);
+  var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${pid}')`;
+  pool.query(query,(err,result)=>{
+    if(err) throw err;
+    res.send("Success");
+  });
+});
+
+userRouter.post('/vote',(req,res,next)=>{
+  var uid=conv.intconv(req.body.userId);
+  var pid=conv.intconv(req.body.projectId);
+  var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${pid}')`;
+  pool.query(query,(err,result)=>{
+    if(err) throw err;
+    res.send("Success");
+  });
+});
+userRouter.post('/sponsor',(req,res,next)=>{
+  var uid=conv.intconv(req.body.userId);
+  var pid=conv.intconv(req.body.projectId);
+  var amount=conv.numconv(req.body.amount);
+  var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${amount}',curdate(),'${pid}')`;
+  pool.query(query,(err,result)=>{
+    if(err) throw err;
+    res.send("Success");
+  });
 });
 module.exports=userRouter;

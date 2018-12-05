@@ -5,12 +5,11 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 module.exports=function(passport){
 var opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 opts.secretOrKey = config.secret;
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-  console.debug(jwt_payload);
-    userController.getUser({username: jwt_payload.userName}, function(err, user) {
-      user=JSON.stringify(JSON.parse(user[0]));
+    userController.getUserByEmail(jwt_payload.userEmail, function(err, user) {
+      
         if (err) {
             return done(err, false);
         }

@@ -1,0 +1,43 @@
+//for regUser
+{
+	"username":"shehryar",
+	"email":"shehryar.naeem44@gmail.com",
+	"password":"helloworld",
+	"cnic":"1234567891011",
+	"ccnum":"123456789101112"
+}
+
+{
+	"username":"hassan",
+	"email":"shehryar.naeem4@gmail.com",
+	"password":"helloworl",
+	"cnic":"1234567891012",
+	"ccnum":"123456789101113"
+}
+
+for category
+{
+	"cname":"cat keepers",
+	"desc":"billion k chanay walay"
+}
+for projects
+{
+	"title":"Snowbell",
+	"proDesc":"hello",
+	"milestone":"1234.67",
+	"fundsRecieved":"1234.6",
+	"proStatus":"1",
+	"maxVotes":"50",
+	"totalVotes":"70",
+	"category":"cat keepers"
+}
+{
+	"title":"Snow",
+	"proDesc":"hello",
+	"milestone":"1234.67",
+	"fundsRecieved":"1234.6",
+	"proStatus":"1",
+	"maxVotes":"50",
+	"totalVotes":"70",
+	"category":"cat keepers"
+}

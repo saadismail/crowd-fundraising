@@ -1,170 +1,136 @@
--- MySQL Workbench Forward Engineering
+CREATE SCHEMA `crowdfundraising` ;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+--> User Entity
+create table if not exists regUser(
+	userName varchar(25) NOT NULL,
+    userId INT NOT NULL AUTO_INCREMENT UNIQUE,
+    userEmail varchar(50) NOT NULL Unique,
+    userPassword varchar(60) NOT NULL,
+    cnic BIGINT(13) NOT NULL UNIQUE,
+    ccNumber BIGINT(16) NOT NULL UNIQUE,
+    fundsSent DOUBLE ,
+    Primary Key(userId)
+);
 
--- -----------------------------------------------------
--- Schema DbProj
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema DbProj
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `DbProj` ;
-USE `DbProj` ;
-
--- -----------------------------------------------------
--- Table `DbProj`.`User_sponsors_Projects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`User_sponsors_Projects` (
-  `SUserId` INT NOT NULL,
-  `ProjectId` INT NOT NULL,
-  `fundsSent` DOUBLE NOT NULL,
-  `SponsorDate` DATE NOT NULL,
-  PRIMARY KEY (`SUserId`, `ProjectId`),
-  UNIQUE INDEX `SUserId_UNIQUE` (`SUserId` ASC) VISIBLE,
-  UNIQUE INDEX `ProjectId_UNIQUE` (`ProjectId` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`User_Likes_Projects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`User_Likes_Projects` (
-  `LUserId` INT NOT NULL,
-  `LProjectId` INT NOT NULL,
-  `DateLiked` DATE NOT NULL,
-  PRIMARY KEY (`LUserId`, `LProjectId`),
-  UNIQUE INDEX `LUserId_UNIQUE` (`LUserId` ASC) VISIBLE,
-  UNIQUE INDEX `LProjectId_UNIQUE` (`LProjectId` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`User_votesFor_Projects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`User_votesFor_Projects` (
-  `VUserId` INT NOT NULL,
-  `votedFor` INT NOT NULL,
-  `DateVoted` DATE NOT NULL,
-  PRIMARY KEY (`VUserId`, `votedFor`),
-  UNIQUE INDEX `VUserId_UNIQUE` (`VUserId` ASC) VISIBLE,
-  UNIQUE INDEX `votedFor_UNIQUE` (`votedFor` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`User_sponsors_Projects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`User_sponsors_Projects` (
-  `SUserId` INT NOT NULL,
-  `ProjectId` INT NOT NULL,
-  `fundsSent` DOUBLE NOT NULL,
-  `SponsorDate` DATE NOT NULL,
-  PRIMARY KEY (`SUserId`, `ProjectId`),
-  UNIQUE INDEX `SUserId_UNIQUE` (`SUserId` ASC) VISIBLE,
-  UNIQUE INDEX `ProjectId_UNIQUE` (`ProjectId` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`Administrators_post_Project`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`Administrators_post_Project` (
-  `PAdminId` INT NOT NULL,
-  `P_Id` INT NOT NULL,
-  `DatePosted` DATE NOT NULL,
-  PRIMARY KEY (`PAdminId`, `P_Id`),
-  UNIQUE INDEX `PAdminId_UNIQUE` (`PAdminId` ASC) VISIBLE,
-  UNIQUE INDEX `P_Id_UNIQUE` (`P_Id` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`listedIn`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`listedIn` (
-  `IProj_Id` INT NOT NULL,
-  `Category` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`IProj_Id`, `Category`),
-  UNIQUE INDEX `IProj_Id_UNIQUE` (`IProj_Id` ASC) VISIBLE,
-  UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DbProj`.`Projects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`Projects` (
-  `ProjectId` INT NOT NULL AUTO_INCREMENT,
+-->Project Entity
+CREATE TABLE `crowdfundraising`.`Projects` (
+  `projectId` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `proDesc` VARCHAR(500) NOT NULL,
+  `milestone` DOUBLE NOT NULL,
   `fundsRecieved` DOUBLE NULL,
-  `Milestone` DOUBLE NOT NULL,
-  `Status` VARCHAR(10) NOT NULL,
-  `Title` VARCHAR(45) NOT NULL,
-  `Category` VARCHAR(45) NOT NULL,
-  `MaxVotes` INT NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Votes` INT NULL,
-  PRIMARY KEY (`ProjectId`),
-  UNIQUE INDEX `ProjectId_UNIQUE` (`ProjectId` ASC) VISIBLE,
-  UNIQUE INDEX `Title_UNIQUE` (`Title` ASC) VISIBLE,
-  CONSTRAINT `fk_Projects_User_sponsors_Projects1`
-    FOREIGN KEY (`ProjectId`)
-    REFERENCES `DbProj`.`User_sponsors_Projects` (`ProjectId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Projects_User_Likes_Projects1`
-    FOREIGN KEY (`ProjectId`)
-    REFERENCES `DbProj`.`User_Likes_Projects` (`LProjectId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Projects_User_votesFor_Projects1`
-    FOREIGN KEY (`ProjectId`)
-    REFERENCES `DbProj`.`User_votesFor_Projects` (`votedFor`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Projects_Administrators_post_Project1`
-    FOREIGN KEY (`ProjectId`)
-    REFERENCES `DbProj`.`Administrators_post_Project` (`P_Id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Projects_listedIn1`
-    FOREIGN KEY (`ProjectId`)
-    REFERENCES `DbProj`.`listedIn` (`IProj_Id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  `proStatus` TINYINT(1) NOT NULL DEFAULT 0,
+  `maxVotes` INT NOT NULL,
+  `totalVotes` INT NULL,
+  `creationDate` DATE NOT NULL,
+  PRIMARY KEY (`projectId`),
+  UNIQUE INDEX `projectId_UNIQUE` (`projectId` ASC) VISIBLE,
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC) VISIBLE);
+
+--> Category Entity
+create table if not exists Categories(
+	cname varchar(45) NOT NULL UNIQUE,
+    projectID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    Primary KEY(cname)
+);
+
+
+--> Administrator
+create table if not exists Administrator(
+	adminId INT not null unique auto_increment,
+    adminName varchar(50) not null,
+    adminPost varchar(20) not null,
+    Primary Key(adminId)
+);
+
+CREATE TABLE `crowdfundraising`.`user_likes_Projects` (
+  `userId` INT NOT NULL,
+  `projectId` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`userId`, `projectId`),
+  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
+  UNIQUE INDEX `projectId_UNIQUE` (`projectId` ASC) VISIBLE);
+
+CREATE TABLE `crowdfundraising`.`user_votes_Projects` (
+  `userId` INT NOT NULL ,
+  `projectId` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`userId`, `projectId`),
+  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
+  UNIQUE INDEX `projectId_UNIQUE` (`projectId` ASC) VISIBLE);
+
+CREATE TABLE `crowdfundraising`.`user_sponsors_Projects` (
+  `userId` INT NOT NULL ,
+  `amount` DOUBLE not null,
+  `dateofsending`  DATE not null,
+  `projectId` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`userId`, `projectId`),
+  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
+  UNIQUE INDEX `projectId_UNIQUE` (`projectId` ASC) VISIBLE);
+
+
+CREATE TABLE `crowdfundraising`.`Projects_listedin_cat` (
+  `projectId` INT NOT NULL AUTO_INCREMENT unique,
+  `cname` varchar(45) NOT NULL,
+  PRIMARY KEY ( `projectId`),
+  UNIQUE INDEX `projectId_UNIQUE` (`projectId` ASC) VISIBLE);
 
 
 
--- -----------------------------------------------------
--- Table `DbProj`.`Administrators`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`Administrators` (
-  `AdminId` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
-  `Post` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`AdminId`),
-  UNIQUE INDEX `AdminId_UNIQUE` (`AdminId` ASC) VISIBLE,
-  CONSTRAINT `fk_Administrators_Administrators_post_Project1`
-    FOREIGN KEY (`AdminId`)
-    REFERENCES `DbProj`.`Administrators_post_Project` (`PAdminId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+-->Alter queries
+Alter TABLE regUser
+ADD column dateofReg DATE NOT NULL;
 
+Alter TABLE Projects
+ADD column category varchar(45) NOT NULL;
 
--- -----------------------------------------------------
--- Table `DbProj`.`Category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DbProj`.`Category` (
-  `Name` VARCHAR(45) NOT NULL,
-  `Projects` VARCHAR(45) NOT NULL,
-  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) VISIBLE,
-  PRIMARY KEY (`Name`),
-  INDEX `fk_Category_listedIn1_idx` (`Projects` ASC) VISIBLE,
-  CONSTRAINT `fk_Category_listedIn1`
-    FOREIGN KEY (`Projects`)
-    REFERENCES `DbProj`.`listedIn` (`Category`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+ALTER TABLE `crowdfundraising`.`Categories` 
+CHANGE COLUMN `projectID` `description` TEXT(500) NOT NULL ,
+DROP INDEX `projectID` ;
 
+alter table crowdfundraising.user_likes_Projects
+add foreign key (userId)
+references regUser(userId)
+on delete cascade
+on update no action;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+alter table crowdfundraising.user_likes_Projects
+add foreign key (projectId)
+references Projects(projectId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.user_sponsors_Projects
+add foreign key (userId)
+references regUser(userId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.user_sponsors_Projects
+add foreign key (projectId)
+references Projects(projectId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.user_votes_Projects
+add foreign key (userId)
+references regUser(userId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.user_votes_Projects
+add foreign key (projectId)
+references Projects(projectId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.Projects_listedin_cat
+add foreign key (projectId)
+references Projects(projectId)
+on delete cascade
+on update no action;
+
+alter table crowdfundraising.Projects_listedin_cat
+add foreign key (cname)
+references Categories(cname)
+on delete cascade
+on update no action;
+

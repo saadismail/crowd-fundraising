@@ -20,9 +20,9 @@ import { IndProjectComponent } from './components/ind-project/ind-project.compon
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 import { AuthService } from './services/auth.service';
-import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },

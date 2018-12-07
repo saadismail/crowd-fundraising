@@ -27,6 +27,7 @@ userRouter.post('/authenticate',(req,res,next)=>{
       if(isMatch){
         
        const token= jwt.sign(user,config.secret,{expiresIn:604800});
+       console.log(token);
         res.json({
           success:true,
           token:"JWT "+token,
@@ -39,7 +40,7 @@ userRouter.post('/authenticate',(req,res,next)=>{
         });
       }
       else{
-        return res.json({success:false,msg:`${user[0].userPassword},${user[0].userId}`})
+        return res.json({success:false,user})
     }
     });
   });
@@ -54,27 +55,33 @@ userRouter.post('/like',(req,res,next)=>{
   var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${pid}')`;
   pool.query(query,(err,result)=>{
     if(err) throw err;
-    res.send("Success");
+    res.json({
+      success:true
+    });
   });
 });
 
 userRouter.post('/vote',(req,res,next)=>{
   var uid=conv.intconv(req.body.userId);
   var pid=conv.intconv(req.body.projectId);
-  var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${pid}')`;
+  var query=`Insert into crowdfundraising.user_votes_Projects(userId,projectId) values('${uid}','${pid}')`;
   pool.query(query,(err,result)=>{
     if(err) throw err;
-    res.send("Success");
+    res.json({
+      success:true
+    });
   });
 });
 userRouter.post('/sponsor',(req,res,next)=>{
   var uid=conv.intconv(req.body.userId);
   var pid=conv.intconv(req.body.projectId);
   var amount=conv.numconv(req.body.amount);
-  var query=`Insert into crowdfundraising.user_likes_Projects(userId,projectId) values('${uid}','${amount}',curdate(),'${pid}')`;
+  var query=`Insert into crowdfundraising.user_sponsors_Projects(userId,amount,dateofsending,projectId) values('${uid}','${amount}',curdate(),'${pid}')`;
   pool.query(query,(err,result)=>{
     if(err) throw err;
-    res.send("Success");
+    res.json({
+      success:true
+    });
   });
 });
 module.exports=userRouter;

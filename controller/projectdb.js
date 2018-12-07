@@ -73,3 +73,17 @@ module.exports.getProject=(title,callback)=>{
     });
   
 }
+
+module.exports.getProjects=(callback)=>{
+  var query=`Select * from Projects`;
+  pool.query(query,(err,result)=>{
+    pool.query(query,(err,result)=>{
+      if(err) callback(err);
+      else{
+          callback(null,JSON.parse(JSON.stringify(result)));
+        
+      }
+    });
+  });
+
+}

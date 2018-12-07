@@ -1,19 +1,16 @@
-<body>
-    <div class="container">
-        <div class="shadow p-3 mb-5 bg-light rounded">
-    <div class="card">
-        <div class="card-header">Don't have an account?
-            <a href="register">Register</a>
-          </div>
-      <div class="card-body">
-        <h2 class="card-title">Log In</h2>
-        <form [formGroup]="logInForm">
-          <input type="text"  id="name" class= "form-control" placeholder="Name or email" formControlName="name" required><br>
-          <input type="password" class= "form-control" placeholder="Enter Password" formControlName="password" required ><br>
-        </form>
-        <button type="submit" (click)=onClickSubmit(registerForm.value) id="acc" [disabled]="!registerForm.valid" class="btn btn-primary btn-lg btn-block">Create Account</button>
-      </div>
-    </div>
-    </div>
-    </div>  
-    </body>
+<app-navbar></app-navbar>
+<div class="regCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">{{tok}}
+    <a href="register">Register</a>
+  </div>
+<div class="card-body">
+<h2 class="card-title">Log In</h2>
+<form [formGroup]="logInForm">
+  <input type="text"  id="name" class= "form-control" placeholder="Name or email" formControlName="name" required><br>
+  <input type="password" class= "form-control" placeholder="Enter Password" formControlName="password" required ><br>
+</form>
+<button type="submit" (click)=onClickSubmit(registerForm.value) id="acc" [disabled]="!registerForm.valid" class="btn btn-secondary btn-lg btn-block">Log In</button>
+</div>
+</div>
+</div>

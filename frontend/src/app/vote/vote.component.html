@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="voteCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">Vote
+  </div>
+<div class="card-body">
+<h2 class="card-title">Favourite Project:{{status}}</h2>
+<form [formGroup]="voteForm">
+  <input type="number"  id="name" class= "form-control" placeholder="User Id" formControlName="uid" required><br>
+  <input type="number" class= "form-control" placeholder="Project Id" formControlName="pid" required ><br>
+</form>
+<button type="submit" (click)=onClickSubmit(voteForm.value) id="acc" [disabled]="!voteForm.valid" class="btn btn-secondary btn-lg btn-block">Vote</button>
+</div>
+</div>
+</div>

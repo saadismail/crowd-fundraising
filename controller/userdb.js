@@ -17,7 +17,7 @@ module.exports.registerUser=function(req,res,next){
   password=hashPassword(password);
   var tfundsSent=convfunc.numconv(req.body.fundsSent);
   var cnic=convfunc.numconv(req.body.cnic);
-  var ccNum=convfunc.intconv(req.body.ccnum);
+  var ccNum=convfunc.numconv(req.body.ccnum);
  // console.log(name+" "+email+" "+ password+" "+tfundsSent+" "+date+" "+cnic+" "+ccNum+" "+userAddress);
   var query=`insert into crowdfundraising.regUser(userName,
     userEmail,userPassword,dateOfReg,cnic,ccNumber)
@@ -25,7 +25,9 @@ module.exports.registerUser=function(req,res,next){
    curdate(),'${cnic}','${ccNum}')`;
     pool.query(query,(err,result,fields)=>{
       if(err) throw err;
-      res.send("Success");
+      res.json({
+        success:true
+      });
     });
 
 };

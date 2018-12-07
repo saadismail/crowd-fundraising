@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormGroup,Validators,FormBuilder} from '@angular/forms';
+import {AuthService} from 'app/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,8 @@ export class LoginComponent implements OnInit {
   name;
   password;
   logInForm;
-
-  constructor(public formBuilder:FormBuilder) { }
+  tok;
+  constructor(public formBuilder:FormBuilder,private authService:AuthService,private router:Router) { }
 
   ngOnInit() {
     this.logInForm=this.formBuilder.group({
@@ -21,8 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   onClickSubmit(data){
-    this.name=data.name;
-    this.password=data.password;
+    const user={
+      email:data.name,
+      password:data.password
+    }
+    this.authService.authenticateUser(user).subscribe(data=>{
+      console.log(data.token)
+      this.tok=data.token;
+    })
   }
 
 }

@@ -8,10 +8,9 @@ const port=8081;
 const pool=require("./config/db");
 const bcrypt=require('bcryptjs');
 const userdb=require("./controller/userdb");
-
-
 app=express();
 app.use(bodyParser.json());
+app.use(cors())
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport")(passport);

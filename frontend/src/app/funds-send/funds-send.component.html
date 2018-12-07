@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="fundCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">Send Funds
+  </div>
+<div class="card-body">
+<h2 class="card-title">Fund Project:{{status}}</h2>
+<form [formGroup]="fundForm">
+  <input type="number"   class= "form-control" placeholder="User Id" formControlName="uid" required><br>
+  <input type="number" class= "form-control" placeholder="Project Id" formControlName="pid" required ><br>
+  <input type="number" class= "form-control" placeholder="Enter Amount" formControlName="amount" required ><br>
+</form>
+<button type="submit" (click)=onClickSubmit(fundForm.value) id="acc" [disabled]="!fundForm.valid" class="btn btn-secondary btn-lg btn-block">Send</button>
+</div>
+</div>
+</div>
+<div *ngIf='status'>
+  <div class="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

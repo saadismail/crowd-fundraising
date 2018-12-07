@@ -1,5 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import {FormControl,FormGroup,Validators,FormBuilder} from '@angular/forms';
+import { AuthService } from 'app/auth.service';
+import { Router } from '@angular/router';
 interface User{
   name:string;
   password:string
@@ -18,8 +20,10 @@ export class RegisterComponent implements OnInit {
   email;
   cnic;
   registerForm;
+  status=false;
 
-  constructor(public formBuilder:FormBuilder) { 
+  constructor(public formBuilder:FormBuilder,private authService: AuthService,
+    private router: Router) { 
   }
 
   ngOnInit() {
@@ -34,12 +38,25 @@ export class RegisterComponent implements OnInit {
   }
  
    onClickSubmit(data){
-    this.name=data.name;
-    this.password=data.password;
-    this.ccNumber=data.ccNumber;
-    this.email=data.email;
-    this.cnic=data.cnic;
+     const user={
+      username:data.name,
+      email:data.email,
+      password:data.password,
+      cnic:data.cnic,
+      ccnum:data.ccNumber
+     }
+
+
+  this.authService.registerUser(user).subscribe(data=>{
+    if(data.success){
+      this.router.navigate(['/login'])
+    }
+    else{
+      this.router.navigate(['/register']);
+    }
+  })
 
   }
+
 
 }

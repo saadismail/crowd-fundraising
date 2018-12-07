@@ -17,5 +17,10 @@ proRouter.post('/getProject',(req,res,next)=>{
     else res.json(pro);
   })
 })
-
+proRouter.get('/getProjects',(req,res,next)=>{
+  prodb.getProjects((err,pro)=>{
+    if(err) throw err;
+    else res.json(pro);
+  })
+});
 module.exports=proRouter;

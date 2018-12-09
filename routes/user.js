@@ -17,6 +17,7 @@ userRouter.post('/getUsers',(req,res,next)=>{
 });
 
 userRouter.post('/authenticate',(req,res,next)=>{
+  console.log(req.body);
   userdb.getUserByEmail(conv.strconv(req.body.email),(err,user)=>{
     if(err) throw err;
     if(!user){
@@ -47,6 +48,7 @@ userRouter.post('/authenticate',(req,res,next)=>{
   
 });
 userRouter.get("/profile",passport.authenticate("jwt",{session:false}),(req,res,next)=>{
+  console.log(req.user);
   res.json({user:req.user});
 });
 userRouter.post('/like',(req,res,next)=>{
@@ -83,5 +85,27 @@ userRouter.post('/sponsor',(req,res,next)=>{
       success:true
     });
   });
+});
+userRouter.delete('/delete/:id',(req,res,next)=>{
+  var uid=conv.intconv(req.params.userId);
+  var query=`DELETE from regUser where id=${uid}`;
+  pool.query(query,(err,result)=>{
+    if(err) throw err;
+    res.json({
+      succcess:true
+    });
+  })
+});
+userRouter.get('/getUser/:id',(req,res,next)=>{
+  var uid=conv.intconv(req.params.id);
+  console.log(req.params);
+  var query=`Select * from regUser where userId='${uid}'`;
+  pool.query(query,(err,result)=>{
+    if(err) throw err;
+    res.json({
+      success:true,
+      msg:result
+    });
+  })
 });
 module.exports=userRouter;

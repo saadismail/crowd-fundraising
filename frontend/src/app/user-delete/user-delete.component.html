@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="delCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">
+    <a href="register">Register</a>
+  </div>
+<div class="card-body">
+<h2 class="card-title">Delete user:{{info}}</h2>
+<form [formGroup]="delForm">
+  <input type="number"  id="name" class= "form-control" placeholder="User Id" formControlName="uid" required><br>
+</form>
+<button type="submit" (click)=onClickSubmit(delForm.value) id="acc" [disabled]="!delForm.valid" class="btn btn-secondary btn-lg btn-block">Log In</button>
+</div>
+</div>
+</div>

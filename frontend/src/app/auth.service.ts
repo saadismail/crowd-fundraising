@@ -39,6 +39,14 @@ loadToken() {
   this.authToken = token;
 }
 
+deleteUser(id) {
+  return this.http.delete('http://localhost:8081/delete/:' + id)
+    .pipe(map((res:Response) => res.json()));
+}
+getUser(id){
+  return this.http.get('http://localhost:8081/user/getUser/:'+id)
+  .pipe(map((res:Response)=>res.json()));
+}
 logout() {
   this.authToken = null;
   this.user = null; 

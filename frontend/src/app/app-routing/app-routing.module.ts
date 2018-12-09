@@ -7,6 +7,7 @@ import {LoginComponent} from 'app/login/login.component';
 import{AboutusComponent} from 'app/aboutus/aboutus.component';
 import {VoteComponent} from 'app/vote/vote.component';
 import{FundsSendComponent} from 'app/funds-send/funds-send.component';
+import {UserDeleteComponent} from 'app/user-delete/user-delete.component';
 const routes:Routes=[
   {path:'',component:AppComponent},
   {path:'home',component:HomeComponent},
@@ -14,8 +15,8 @@ const routes:Routes=[
   {path:'login',component:LoginComponent},
   {path:'aboutus',component:AboutusComponent},
   {path:'vote',component:VoteComponent},
-  {path:'funds',component:FundsSendComponent}
-
+  {path:'funds',component:FundsSendComponent},
+  {path:'delete',component:UserDeleteComponent}
 ]
 @NgModule({
   imports:[RouterModule.forRoot(routes)],

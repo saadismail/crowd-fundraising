@@ -8,6 +8,7 @@ var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 opts.secretOrKey = config.secret;
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+  console.log("here");
     userController.getUserByEmail(jwt_payload.userEmail, function(err, user) {
       
         if (err) {

@@ -16,6 +16,7 @@ import { VoteComponent } from './vote/vote.component';
 import { FundsSendComponent } from './funds-send/funds-send.component';
 import { CategoriesComponent } from './categories/categories.component';
 import {UserService} from './user.service';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import {UserService} from './user.service';
     AboutusComponent,
     VoteComponent,
     FundsSendComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    UserDeleteComponent
   ],
   imports: [
     BrowserModule,

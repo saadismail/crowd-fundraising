@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.logInForm=this.formBuilder.group({
-      name:[this.name,[Validators.required]],
+      name:['',[Validators.required]],
       password:['',[Validators.required]]
     });
   }
@@ -27,9 +27,13 @@ export class LoginComponent implements OnInit {
       email:data.name,
       password:data.password
     }
+    this.name=data.name;
+    this.password=data.password;
     this.authService.authenticateUser(user).subscribe(data=>{
-      console.log(data.token)
-      this.tok=data.token;
+      this.authService.storeUserData(data.token,data.user)
+    });
+    this.authService.getProfile().subscribe(data=>{
+      this.tok=data.user.userEmail;
     })
   }
 

@@ -30,12 +30,6 @@ create table if not exists crowdfundraising.Categories(
     Primary KEY(cname)
 );
 
-oken:"JWT "+token,
-          user: {
-            id: user.userId,
-            name: user.userName,
-            email: user.userEmail,
-
 create table if not exists crowdfundraising.Administrator(
 	adminId INT not null unique auto_increment,
     adminName varchar(50) not null,

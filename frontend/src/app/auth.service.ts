@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import{Http,Headers,Response} from '@angular/http';
 import{map} from 'rxjs/operators/map'
+
 @Injectable()
 export class AuthService {
   authToken: any;
 user: any;
   constructor(private http: Http) { }
 
-  authenticateUser(user) {
+authenticateUser(user) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     return this.http.post('http://localhost:8081/user/authenticate', user, {headers: headers})
@@ -45,12 +46,17 @@ deleteUser(id) {
 }
 getUser(id){
   return this.http.get('http://localhost:8081/user/getUser/:'+id)
-  .pipe(map((res:Response)=>res.json()));
+    .pipe(map((res:Response)=>res.json()));
 }
+
 logout() {
   this.authToken = null;
   this.user = null; 
   localStorage.clear();
+}
+
+isLoggedIn() {
+  return (localStorage.getItem('id_token') != undefined);
 }
 
 }

@@ -8,6 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@auth0/angular-jwt": "^2.0.0",
+    "angular2-flash-messages": "^3.0.1",
     "bcryptjs": "*",
     "body-parser": "*",
     "cors": "*",

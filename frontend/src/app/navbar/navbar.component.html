@@ -10,32 +10,37 @@
       <li class="nav-item active">
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn()" >
+        <a class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
+      </li>
+
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <a class="nav-link" href="login">LogIn</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <a class="nav-link" href="register">Register</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="aboutus">AboutUs</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" href="vote">Vote</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" href="funds">Send Funds</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" href="delete">Delete</a>
       </li>
-      <li class="nav-item dropdown show">
+      <li class="nav-item dropdown show" *ngIf="authService.isLoggedIn()">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Categories</a>
         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
           <a class="dropdown-item" href="addCategory">Add Category</a>
           <a class="dropdown-item" href="#">Categories</a>
         </div>
       </li>
-      <li class="nav-item dropdown show">
+      <li class="nav-item dropdown show" *ngIf="authService.isLoggedIn()">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Projects</a>
         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
           <a class="dropdown-item" href="#">Projects List</a>
@@ -43,10 +48,10 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
   </div>
 </nav>
 </div>

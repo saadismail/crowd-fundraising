@@ -10,6 +10,7 @@ import{FundsSendComponent} from 'app/funds-send/funds-send.component';
 import {UserDeleteComponent} from 'app/user-delete/user-delete.component';
 import {AddProjectComponent} from 'app/add-project/add-project.component';
 import { AddCategoryComponent } from 'app/add-category/add-category.component';
+import {AdminLoginComponent} from 'app/admin-login/admin-login.component';
 const routes:Routes=[
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
@@ -20,7 +21,8 @@ const routes:Routes=[
   {path:'funds',component:FundsSendComponent},
   {path:'delete',component:UserDeleteComponent},
   {path:'addProject',component:AddProjectComponent},
-  {path:'addCategory',component:AddCategoryComponent}
+  {path:'addCategory',component:AddCategoryComponent},
+  {path:'adminLogin',component:AdminLoginComponent}
 ]
 @NgModule({
   imports:[RouterModule.forRoot(routes)],

@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="adCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">
+    <a href="register">Register</a>
+  </div>
+<div class="card-body">
+<h2 class="card-title">Log In</h2>
+<form [formGroup]="adForm">
+  <input type="text"  id="name" class= "form-control" placeholder="Name or email" formControlName="name" required><br>
+  <input type="password" class= "form-control" placeholder="Enter Password" formControlName="password" required ><br>
+</form>
+<button type="submit" (click)=onClickSubmit(adForm.value) id="acc" [disabled]="!adForm.valid" class="btn btn-secondary btn-lg btn-block">Log In</button>
+</div>
+</div>
+</div>

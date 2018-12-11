@@ -19,6 +19,7 @@ import {UserService} from './user.service';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     CategoriesComponent,
     UserDeleteComponent,
     AddProjectComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,

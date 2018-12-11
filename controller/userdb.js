@@ -20,9 +20,9 @@ module.exports.registerUser=function(req,res,next){
   var ccNum=convfunc.numconv(req.body.ccnum);
  // console.log(name+" "+email+" "+ password+" "+tfundsSent+" "+date+" "+cnic+" "+ccNum+" "+userAddress);
   var query=`insert into crowdfundraising.regUser(userName,
-    userEmail,userPassword,dateOfReg,cnic,ccNumber)
+    userEmail,userPassword,dateOfReg,cnic)
    values('${name}','${email}','${password}',
-   curdate(),'${cnic}','${ccNum}')`;
+   curdate(),'${cnic}')`;
     pool.query(query,(err,result,fields)=>{
       if(err) throw err;
       res.json({

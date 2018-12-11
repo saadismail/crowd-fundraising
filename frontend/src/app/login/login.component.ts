@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   name;
   password;
   logInForm;
-  tok;
+  status;
   constructor(public formBuilder:FormBuilder,private authService:AuthService,private router:Router) { }
 
   ngOnInit() {
@@ -30,11 +30,16 @@ export class LoginComponent implements OnInit {
     this.name=data.name;
     this.password=data.password;
     this.authService.authenticateUser(user).subscribe(data=>{
-      this.authService.storeUserData(data.token,data.user)
+      if(data.success){
+        this.authService.storeUserData(data.token,data.user);
+        this.status=1;
+        this.router.navigate(['/home']);
+      }
+      else{
+        this.status=0;
+      }
+      
     });
-    this.authService.getProfile().subscribe(data=>{
-      this.tok=data.user.userEmail;
-    })
   }
 
 }

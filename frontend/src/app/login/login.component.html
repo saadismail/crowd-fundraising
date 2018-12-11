@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="regCard">
 <div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
-  <div class="card-header text-center">{{tok}}
+  <div class="card-header text-center">
     <a href="register">Register</a>
   </div>
 <div class="card-body">
-<h2 class="card-title">Log In:{{name}},{{password}}</h2>
+<h2 class="card-title">Log In</h2>
 <form [formGroup]="logInForm">
   <input type="text"  id="name" class= "form-control" placeholder="Name or email" formControlName="name" required><br>
   <input type="password" class= "form-control" placeholder="Enter Password" formControlName="password" required ><br>
@@ -14,3 +14,19 @@
 </div>
 </div>
 </div>
+ 
+  <div class="modal" *ngIf="status==1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Log In Successfull</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You may now proceed</p>
+        </div>
+      </div>
+    </div>
+  </div>

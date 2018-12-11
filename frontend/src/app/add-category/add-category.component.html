@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="addCCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">Have an account?
+    <a href="login">login</a></div>
+  <div class="card-body">
+    <h4 class="card-title">Add Category</h4>
+    <form [formGroup]="addCForm">
+      <input type="text"  id="title" class= "form-control" placeholder="Category Title" formControlName="title" required><br>
+      <textarea class="form-control" id="desc" formControlName="desc" placeholder= "Enter Description" rows="3" required></textarea><br>
+    </form>
+    <button type="submit" (click)=onClickSubmit(addCForm.value) id="acc" [disabled]="!addCForm.valid" 
+    class="btn btn-secondary btn-lg btn-block">Create Category</button>
+  </div>
+</div>
+</div>

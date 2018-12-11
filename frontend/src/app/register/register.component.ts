@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
       name:[this.name,[Validators.required]],
       email:['',[Validators.required,Validators.pattern("[^ @]*@[^ @]*")]],
       password:['',[Validators.required,Validators.minLength(6),Validators.maxLength(20)]],
-      ccNumber:['',[Validators.required,Validators.minLength(16),Validators.maxLength(16)]],
       cnic:['',[Validators.required,Validators.minLength(13),Validators.maxLength(13)]]
     });
   
@@ -42,8 +41,7 @@ export class RegisterComponent implements OnInit {
       username:data.name,
       email:data.email,
       password:data.password,
-      cnic:data.cnic,
-      ccnum:data.ccNumber
+      cnic:data.cnic
      }
 
 

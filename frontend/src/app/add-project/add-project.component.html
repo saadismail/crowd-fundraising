@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="addCard">
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-header text-center">Have an account?
+    <a href="login">login</a></div>
+  <div class="card-body">
+    <h4 class="card-title">Add Project</h4>
+    <form [formGroup]="addForm">
+      <input type="text"  id="title" class= "form-control" placeholder="Project Title" formControlName="title" required><br>
+      <textarea class="form-control" id="desc" formControlName="desc" placeholder= "Enter Description" rows="3" required></textarea><br>
+      <input type="number" class= "form-control" placeholder="Enter Milestone" formControlName="milestone" required><br>
+      <input type="number" class= "form-control" placeholder="Max Votes" formControlName="maxvotes" required ><br>
+      <select class="form-control" fromControlName="cat" id="category">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select><br>
+    </form>
+    <button type="submit" (click)=onClickSubmit(addForm.value) id="acc" [disabled]="!addForm.valid" 
+    class="btn btn-secondary btn-lg btn-block">Create Project</button>
+  </div>
+</div>
+</div>

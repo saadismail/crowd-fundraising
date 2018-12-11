@@ -17,6 +17,8 @@ import { FundsSendComponent } from './funds-send/funds-send.component';
 import { CategoriesComponent } from './categories/categories.component';
 import {UserService} from './user.service';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { AddProjectComponent } from './add-project/add-project.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
     VoteComponent,
     FundsSendComponent,
     CategoriesComponent,
-    UserDeleteComponent
+    UserDeleteComponent,
+    AddProjectComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

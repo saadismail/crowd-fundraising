@@ -25,15 +25,16 @@ function isProject(title,callback){
 
 
 module.exports.createProject=(req,res)=>{
+  console.log(req.body)
   var title=convfunc.strconv(req.body.title);
   var proDesc=convfunc.strconv(req.body.proDesc);
   var milestone=convfunc.numconv(req.body.milestone);
-  var fundsRecieved=convfunc.numconv(req.body.fundsRecieved);
-  var proStatus=convfunc.intconv(req.body.proStatus);
-  var maxVotes=convfunc.intconv(req.body.maxVotes);
-  var totalVotes=convfunc.intconv(req.body.totalVotes);
+  var fundsRecieved = 0;
+  var proStatus = 1;
+  var maxVotes = convfunc.intconv(req.body.maxVotes);
+  var totalVotes = 0;
   var creationDate='curdate()';
-  var category=convfunc.strconv(req.body.category);
+  var category = 1;
   isCategory(category,(val)=>{
     if(val){
       isProject(title,(val)=>{
@@ -43,8 +44,7 @@ module.exports.createProject=(req,res)=>{
           var values=[title,proDesc,milestone,fundsRecieved,proStatus,maxVotes,totalVotes,category];
           pool.query(query,values,(err,result)=>{
             if(err)throw err
-            else res.send("Success");
-      
+            else res.json({success:true});
           });
         }
       });

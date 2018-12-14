@@ -7,7 +7,7 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
 
@@ -33,6 +33,9 @@
       <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" href="delete">Delete</a>
       </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+        <a class="nav-link" href="adminLogin">Admin Login</a>
+      </li>
       <li class="nav-item dropdown show" *ngIf="authService.isLoggedIn()">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Categories</a>
         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
@@ -45,12 +48,6 @@
         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
           <a class="dropdown-item" href="#">Projects List</a>
           <a class="dropdown-item" href="addProject">Add Project</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown show">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Admin</a>
-        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
-          <a class="dropdown-item" href="adminLogin">Admin Login</a>
         </div>
       </li>
 

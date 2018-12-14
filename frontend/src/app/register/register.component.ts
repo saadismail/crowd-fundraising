@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 interface User{
   name:string;
   password:string
-  ccnumber:number;
 }
 @Component({
   selector: 'app-register',
@@ -16,7 +15,6 @@ interface User{
 export class RegisterComponent implements OnInit {
   name;
   password;
-  ccNumber;
   email;
   cnic;
   registerForm;
